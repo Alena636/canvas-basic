@@ -1,0 +1,72 @@
+/* Общие стили для всех страниц */
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
+
+canvas {
+  display: block; /* убирает лишний отступ снизу под канвасом */
+}
+
+/* ===== Стартовая страница (index.html) ===== */
+.start {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  background: #0B1026; /* тот же цвет, что и небо в Space */
+}
+
+.start h1 {
+  margin: 0;
+  font-size: 72px;
+  letter-spacing: 8px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap; /* на узком экране кнопки переносятся в столбик */
+  justify-content: center;
+  gap: 24px;
+  padding: 0 16px;
+}
+
+/* Кнопки — это ссылки, оформленные как кнопки: каждая ведёт на свою страницу */
+.menu a {
+  width: 180px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.menu a:hover {
+  background: #fff;
+  color: #0B1026;
+  transform: translateY(-3px);
+}
+
+/* ===== Кнопка «назад в меню» на страницах с канвасом ===== */
+.back {
+  position: fixed; /* висит поверх канваса в левом верхнем углу */
+  top: 16px;
+  left: 16px;
+  padding: 8px 14px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+.back:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

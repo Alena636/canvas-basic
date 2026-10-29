@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Возврат в меню: кнопка в углу или клавиша Esc -->
+  <a class="back" href="index.html">← Menu</a>
+
+  <canvas id="cnvs"></canvas>
+
+  <script>
+    addEventListener("keydown", (e) => {
+      if (e.code === "Escape") location.href = "index.html";
+    });
+  </script>
+  <script src="game.js"></script>
+</body>
+</html>

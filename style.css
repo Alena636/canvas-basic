@@ -70,3 +70,132 @@ canvas {
 .back:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* ===== Блок «How to play» на страницах с канвасом ===== */
+.help {
+  position: fixed; /* висит поверх канваса в правом верхнем углу */
+  top: 16px;
+  right: 16px;
+  box-sizing: border-box;
+  width: 300px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto; /* на низком экране блок прокручивается, а не обрезается */
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  background: rgba(11, 16, 38, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  backdrop-filter: blur(6px); /* размывает то, что под блоком, — текст легче читать */
+}
+
+/* Свёрнутый блок сжимается до размера заголовка */
+.help:not([open]) {
+  width: auto;
+}
+
+.help summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none; /* убираем стандартный треугольник */
+}
+
+.help summary::-webkit-details-marker {
+  display: none; /* то же самое для Safari */
+}
+
+/* Значок справа от заголовка: «−» свернуть, «+» развернуть */
+.help summary::after {
+  content: "−";
+  opacity: 0.7;
+}
+
+.help:not([open]) summary::after {
+  content: "+";
+}
+
+.help p {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.help h3 {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.help ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Строка управления: слева клавиши, справа что они делают */
+.controls li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls .keys {
+  display: flex;
+  gap: 4px;
+  min-width: 64px;
+}
+
+/* Клавиша, нарисованная как кнопка клавиатуры */
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom-width: 3px; /* толстый низ — будто клавиша объёмная */
+  border-radius: 6px;
+}
+
+/* Цветной квадратик в легенде карты Tank */
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.notes li {
+  position: relative;
+  padding-left: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.notes li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* На узком экране блок уезжает вниз и растягивается, чтобы не наезжать на «← Menu» */
+@media (max-width: 480px) {
+  .help {
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 50vh;
+  }
+}

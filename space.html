@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Возврат в меню: кнопка в углу или клавиша Esc -->
+  <a class="back" href="index.html">← Menu</a>
+
+  <!-- Подсказка по игре. <details> сворачивается кликом по заголовку без всякого JS -->
+  <details class="help" open>
+    <summary>How to play</summary>
+    <p>Pilot a spaceship through a twinkling starfield.</p>
+
+    <h3>Controls</h3>
+    <ul class="controls">
+      <li><span class="keys"><kbd>Mouse</kbd></span> Aim the ship</li>
+      <li><span class="keys"><kbd>W</kbd></span> Hold to fire the engine and fly</li>
+      <li><span class="keys"><kbd>Esc</kbd></span> Back to menu</li>
+    </ul>
+
+    <h3>How it works</h3>
+    <ul class="notes">
+      <li>The ship's nose always turns toward your cursor.</li>
+      <li>When the cursor is very close to the ship, it keeps its angle so it doesn't jitter.</li>
+      <li>While <kbd>W</kbd> is held, the engine flame flickers and the ship flies where its nose points.</li>
+      <li>There are no edges yet: the ship can fly off-screen, so steer it back with the mouse.</li>
+    </ul>
+  </details>
+
+  <canvas id="cnvs"></canvas>
+
+  <script>
+    addEventListener("keydown", (e) => {
+      if (e.code === "Escape") location.href = "index.html";
+    });
+  </script>
+  <script src="game.js"></script>
+</body>
+</html>

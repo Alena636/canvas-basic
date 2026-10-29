@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Возврат в меню: кнопка в углу или клавиша Esc -->
+  <a class="back" href="index.html">← Menu</a>
+
+  <!-- Подсказка по игре. <details> сворачивается кликом по заголовку без всякого JS -->
+  <details class="help" open>
+    <summary>How to play</summary>
+    <p>Make a little platformer hero run.</p>
+
+    <h3>Controls</h3>
+    <ul class="controls">
+      <li><span class="keys"><kbd>←</kbd><kbd>→</kbd></span> Run left and right</li>
+      <li><span class="keys"><kbd>Esc</kbd></span> Back to menu</li>
+    </ul>
+
+    <h3>How it works</h3>
+    <ul class="notes">
+      <li>The character is cut out of one sprite sheet with all its poses.</li>
+      <li>While running, the run frames swap every 0.2 s, so the legs move.</li>
+      <li>Running left flips the picture like a mirror.</li>
+      <li>Let go of the keys and the character goes back to its standing pose.</li>
+    </ul>
+  </details>
+
+  <canvas id="cnvs"></canvas>
+
+  <script>
+    addEventListener("keydown", (e) => {
+      if (e.code === "Escape") location.href = "index.html";
+    });
+  </script>
+  <script src="character.js"></script>
+</body>
+</html>

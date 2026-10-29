@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tank</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Возврат в меню: кнопка в углу или клавиша Esc -->
+  <a class="back" href="index.html">← Menu</a>
+
+  <!-- Подсказка по игре. <details> сворачивается кликом по заголовку без всякого JS -->
+  <details class="help" open>
+    <summary>How to play</summary>
+    <p>Drive a tank around a small battlefield.</p>
+
+    <h3>Controls</h3>
+    <ul class="controls">
+      <li><span class="keys"><kbd>W</kbd></span> Drive forward</li>
+      <li><span class="keys"><kbd>S</kbd></span> Reverse</li>
+      <li><span class="keys"><kbd>A</kbd><kbd>D</kbd></span> Turn the hull</li>
+      <li><span class="keys"><kbd>Mouse</kbd></span> Aim the turret</li>
+      <li><span class="keys"><kbd>Esc</kbd></span> Back to menu</li>
+    </ul>
+
+    <h3>Map</h3>
+    <ul class="controls">
+      <li><span class="keys"><i class="swatch" style="background:#a0472f"></i></span> Brick wall: blocks the tank</li>
+      <li><span class="keys"><i class="swatch" style="background:#9aa0a8"></i></span> Concrete: blocks the tank</li>
+      <li><span class="keys"><i class="swatch" style="background:#2b5f8f"></i></span> Water: not solid yet</li>
+      <li><span class="keys"><i class="swatch" style="background:#3f7a2a"></i></span> Bushes: drive right through</li>
+    </ul>
+
+    <h3>How it works</h3>
+    <ul class="notes">
+      <li>The hull and the turret move separately: the keys steer the hull, the mouse aims the turret.</li>
+      <li>The hull turns in place, so you can spin around without moving.</li>
+      <li>If the next step would hit a wall, the tank just stops.</li>
+    </ul>
+  </details>
+
+  <canvas id="cnvs"></canvas>
+
+  <script>
+    addEventListener("keydown", (e) => {
+      if (e.code === "Escape") location.href = "index.html";
+    });
+  </script>
+  <script src="tank.js"></script>
+</body>
+</html>

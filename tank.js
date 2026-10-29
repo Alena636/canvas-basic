@@ -6,7 +6,8 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const ctx = canvas.getContext("2d");
-const W = canvas.width, H = canvas.height;
+const W = canvas.width,
+  H = canvas.height;
 
 // ===== КАРТА =====
 // Поле — это сетка клеток. Каждая строка массива — один ряд,
@@ -31,8 +32,8 @@ const MAP = [
   "B..................B",
   "BBBBBBBBBBBBBBBBBBBB",
 ];
-const ROWS = MAP.length;     // сколько рядов
-const COLS = MAP[0].length;  // сколько клеток в ряду
+const ROWS = MAP.length; // сколько рядов
+const COLS = MAP[0].length; // сколько клеток в ряду
 
 // Размер клетки подбираем так, чтобы всё поле целиком влезло в экран.
 const TILE = Math.floor(Math.min(W / COLS, H / ROWS));
@@ -195,6 +196,34 @@ function drawTank(g) {
   g.restore();
 }
 
+// Занята ли точка (px, py)? true значит ехать нельзя, false значит можно.
+function isBlocked(px, py) {
+  // 1. Пиксели переводим в номер клетки
+  const col = Math.floor((px - FIELD_X) / TILE);
+  const row = Math.floor((py - FIELD_Y) / TILE);
+
+  // 2. Точку за пределами карты считаем стеной
+  if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return true;
+
+  // 3. Смотрим, какой символ в этой клетке
+  const cell = MAP[row][col];
+
+  // 4. Решаем, мешает ли он
+  return cell === "#" || cell === "B";
+}
+
+// Задевает ли танк что-нибудь, если поставить его центр в точку (x, y)?
+function tankHits(x, y) {
+  const r = TILE * 0.75; // радиус круга вокруг танка
+  for (let i = 0; i < 8; i++) {
+    const a = (i * Math.PI) / 4; // угол очередной точки: 0°, 45°, 90° и так далее
+    const px = x + Math.cos(a) * r; // точка на круге по X
+    const py = y + Math.sin(a) * r; // и по Y
+    if (isBlocked(px, py)) return true; // одна точка в стене, значит задевает
+  }
+  return false; // все восемь точек свободны
+}
+
 const keys = {};
 const mouse = { x: 0, y: 0 };
 
@@ -212,13 +241,22 @@ function update(dt) {
   if (keys["KeyD"]) tank.hullAngle += tank.turnSpeed * dt;
   if (keys["KeyA"]) tank.hullAngle -= tank.turnSpeed * dt;
 
-   if (keys["KeyW"]) {
-    tank.x += Math.cos(tank.hullAngle) * tank.speed * dt;
-    tank.y += Math.sin(tank.hullAngle) * tank.speed * dt;
+  if (keys["KeyW"]) {
+    const nx = tank.x + Math.cos(tank.hullAngle) * tank.speed * dt;
+    const ny = tank.y + Math.sin(tank.hullAngle) * tank.speed * dt;
+    if (!tankHits(nx, ny)) {
+      tank.x = nx;
+      tank.y = ny;
+    }
   }
+
   if (keys["KeyS"]) {
-    tank.x -= Math.cos(tank.hullAngle) * tank.speed * dt;
-    tank.y -= Math.sin(tank.hullAngle) * tank.speed * dt;
+    const nx = tank.x - Math.cos(tank.hullAngle) * tank.speed * dt;
+    const ny = tank.y - Math.sin(tank.hullAngle) * tank.speed * dt;
+    if (!tankHits(nx, ny)) {
+      tank.x = nx;
+      tank.y = ny;
+    }
   }
 
   // Башня всегда поворачивается к мыши.
